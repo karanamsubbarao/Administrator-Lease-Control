@@ -1,7 +1,5 @@
 package com.pss.alcs.atlassian.service;
 
-import com.pss.alcs.atlassian.dao.AtlassianTool;
-
 /**
  * Created by skaranam on 4/3/2015.
  */

@@ -1,9 +1,7 @@
 package com.pss.alcs.atlassian.rest;
 
-import com.pss.alcs.atlassian.dao.AtlassianTool;
-import com.pss.alcs.atlassian.service.ILeaseService;
+import com.pss.alcs.atlassian.domain.AtlassianTool;
 import com.pss.alcs.atlassian.service.IToolService;
-import com.pss.atlassian.tools.jira.JiraClient;
 import com.wordnik.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

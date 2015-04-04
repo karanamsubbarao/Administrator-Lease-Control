@@ -1,7 +1,6 @@
-package com.pss.alcs.atlassian.dao;
+package com.pss.alcs.atlassian.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by skaranam on 3/28/2015.
@@ -11,10 +10,25 @@ import javax.persistence.Table;
 @Table(name="TOOL")
 public class AtlassianTool {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "TYPE", nullable = false)
     private String type;
+
+
+    @Column(name = "NAME", nullable = false)
     private String name;
+
+
+    @Column(name = "URL", unique=true, nullable = false)
     private String url;
+
+    @Column(name = "APIENDPOINT", unique=true, nullable = false)
     private String apiEndPoint;
+
+    @Column(name = "APPROVEREMAILADDRESS", nullable = false)
     private String approverEmailAddress;
 
     public String getType() {

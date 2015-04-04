@@ -21,14 +21,13 @@ public class LeaseGrantController {
     }
 
 
-
     @RequestMapping(value = "/rest/lease/grant/{userId}/{duration}", method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Grants the Administrator Privileges", produces = "application/json")
     public @ResponseBody
-    String grantAdministratorPrivilege(@PathVariable("userId") String userId,@PathVariable("duration") String duration)
+    boolean grantAdministratorPrivilege(@PathVariable("userId") String userId,@PathVariable("duration") String duration)
     {
         double durationValue = Double.parseDouble(duration);
-        return leaseService.helloLease(userId,durationValue);
+        return leaseService.grantLease(userId,durationValue);
     }
 
     @RequestMapping(value = "/rest/lease/revoke/{userId}", method = RequestMethod.GET)
