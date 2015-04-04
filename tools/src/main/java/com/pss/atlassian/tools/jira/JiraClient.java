@@ -65,6 +65,20 @@ public class JiraClient extends AbstractRestClient {
     }
 
 
+    public boolean removeUserFromAdministrator(String userId)
+    {
+        String encodedString = new String(com.sun.jersey.core.util.Base64.encode("admin:password"));
+        ClientResponse responseStatus = webResource(endpoint , USER_TO_GROUP_URL).queryParam("groupname", JIRA_ADMINISTRATORS).queryParam("username", userId).
+                header("Authorization", "Basic " +encodedString).
+                accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).delete(ClientResponse.class);
+        if(responseStatus.getStatusInfo() ==  ClientResponse.Status.CREATED)
+        {
+            return true;
+        }
+       return false;
+    }
+
+
 
     public static void main(String[] args)
     {

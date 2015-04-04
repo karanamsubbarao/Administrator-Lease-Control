@@ -17,16 +17,16 @@ public class LeaseService implements ILeaseService{
     }
 
     @Override
-    public boolean grantLease(String userId, double duration, AtlassianTool tool)
+    public boolean grantLease(String userId, double duration)
     {
-        System.out.println("In the Grant Lease Method");
-        JiraClient client  = new JiraClient(tool.getApiEndPoint());
+        JiraClient client  = new JiraClient("http://localhost:8080");
         return client.addUserToAdministratorGroup(userId);
     }
 
     @Override
-    public boolean revokeLease(String userId, double duration, AtlassianTool tool)
+    public boolean revokeLease(String userId)
     {
-        return false;
+        JiraClient client  = new JiraClient("http://localhost:8080");
+        return client.removeUserFromAdministrator(userId);
     }
 }

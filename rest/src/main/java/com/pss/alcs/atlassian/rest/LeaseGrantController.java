@@ -31,4 +31,12 @@ public class LeaseGrantController {
         return leaseService.helloLease(userId,durationValue);
     }
 
+    @RequestMapping(value = "/rest/lease/revoke/{userId}", method = RequestMethod.GET)
+    @ApiOperation(httpMethod = "GET", value = "Grants the Administrator Privileges", produces = "application/json")
+    public @ResponseBody
+    boolean revokeAdministratorPrivilege(@PathVariable("userId") String userId)
+    {
+        return leaseService.revokeLease(userId);
+    }
+
 }
