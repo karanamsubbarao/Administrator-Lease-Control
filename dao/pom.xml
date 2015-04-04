@@ -33,7 +33,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.pss.alcs.atlassin</groupId>
+            <groupId>com.pss.alcs.atlassian</groupId>
             <artifactId>domain</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

@@ -13,7 +13,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.pss.alcs.atlassin</groupId>
+            <groupId>com.pss.alcs.atlassian</groupId>
             <artifactId>rest</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
