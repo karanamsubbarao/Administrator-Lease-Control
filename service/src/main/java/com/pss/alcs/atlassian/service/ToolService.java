@@ -21,9 +21,9 @@ public class ToolService implements IToolService
 
 
     @Override
-    public boolean saveTool(AtlassianTool tool) {
+    public AtlassianTool saveTool(AtlassianTool tool) {
         toolDAO.saveTool(tool);
-        return false;
+        return toolDAO.findAtlassianToolByURL(tool.getUrl());
     }
 
     @Override

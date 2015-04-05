@@ -18,16 +18,17 @@ public class ToolServiceController {
 
     @RequestMapping(value = "/rest/register/tool", method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Grants the Administrator Privileges", produces = "application/json")
-    public @ResponseBody String registerAtlassianTool()
+    public @ResponseBody AtlassianTool registerAtlassianTool()
     {
-        return toolService.saveTool();
+        AtlassianTool tool = new AtlassianTool("Jira","TEST-JIRA","http://localhost:9000","http://localhost:9000","karanamsubbarao@gmail.com");
+        return toolService.saveTool(tool);
     }
 
 
 
     @RequestMapping(value = "/rest/register/tool/{type}/{name}/{url}/{apiEndPoint}/{approverEmailAddress}", method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Grants the Administrator Privileges", produces = "application/json")
-    public @ResponseBody boolean registerTool(@PathVariable("type") String type, @PathVariable("name")  String name,
+    public @ResponseBody AtlassianTool registerTool(@PathVariable("type") String type, @PathVariable("name")  String name,
                                               @PathVariable("url") String url, @PathVariable("apiEndPoint") String apiEndPoint,
                                               @PathVariable("approverEmailAddress") String approverEmailAddress)
     {

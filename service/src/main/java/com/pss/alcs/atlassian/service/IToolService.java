@@ -8,7 +8,7 @@ import com.pss.alcs.atlassian.domain.AtlassianTool;
 public interface IToolService {
 
     public String saveTool();
-    public boolean saveTool(AtlassianTool tool);
+    public AtlassianTool saveTool(AtlassianTool tool);
     public boolean deleteTool(AtlassianTool tool);
     public boolean updateTool(AtlassianTool tool);
 

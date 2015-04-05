@@ -63,6 +63,9 @@ public class AtlassianTool {
         this.apiEndPoint = apiEndPoint;
     }
 
+    public AtlassianTool() {
+    }
+
     public String getApproverEmailAddress() {
         return approverEmailAddress;
     }
