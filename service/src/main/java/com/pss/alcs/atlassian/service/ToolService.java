@@ -35,4 +35,11 @@ public class ToolService implements IToolService
     public boolean updateTool(AtlassianTool tool) {
         return false;
     }
+
+    @Override
+    public AtlassianTool findToolByName(String name)
+    {
+        return toolDAO.findAtlassianToolByName(name);
+    }
+
 }

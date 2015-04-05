@@ -1,6 +1,8 @@
 package com.pss.alcs.atlassian.rest;
 
+import com.pss.alcs.atlassian.domain.AtlassianTool;
 import com.pss.alcs.atlassian.service.ILeaseService;
+import com.pss.alcs.atlassian.service.IToolService;
 import com.wordnik.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,10 @@ public class LeaseGrantController {
     @Autowired
     private ILeaseService leaseService;
 
+    @Autowired
+    private IToolService toolService;
+
+
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Fetches the Hello World", produces = "application/json")
     public @ResponseBody String helloWorld() {
@@ -21,21 +27,24 @@ public class LeaseGrantController {
     }
 
 
-    @RequestMapping(value = "/rest/lease/grant/{userId}/{duration}", method = RequestMethod.GET)
+    @RequestMapping(value = "/rest/lease/grant/{userId}/{duration}/{nameOfTool}", method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Grants the Administrator Privileges", produces = "application/json")
     public @ResponseBody
-    boolean grantAdministratorPrivilege(@PathVariable("userId") String userId,@PathVariable("duration") String duration)
+    boolean grantAdministratorPrivilege(@PathVariable("userId") String userId,@PathVariable("duration") String duration,
+                                        @PathVariable("nameOfTool") String nameOfTool)
     {
+        AtlassianTool tool = toolService.findToolByName(nameOfTool);
         double durationValue = Double.parseDouble(duration);
-        return leaseService.grantLease(userId,durationValue);
+        return leaseService.grantLease(userId,durationValue,tool);
     }
 
-    @RequestMapping(value = "/rest/lease/revoke/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/rest/lease/revoke/{userId}/{nameOfTool}", method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Grants the Administrator Privileges", produces = "application/json")
     public @ResponseBody
-    boolean revokeAdministratorPrivilege(@PathVariable("userId") String userId)
+    boolean revokeAdministratorPrivilege(@PathVariable("userId") String userId,@PathVariable("nameOfTool") String nameOfTool)
     {
-        return leaseService.revokeLease(userId);
+        AtlassianTool tool = toolService.findToolByName(nameOfTool);
+        return leaseService.revokeLease(userId,tool);
     }
 
 }

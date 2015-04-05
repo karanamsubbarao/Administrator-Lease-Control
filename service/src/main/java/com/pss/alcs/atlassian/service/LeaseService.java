@@ -1,5 +1,6 @@
 package com.pss.alcs.atlassian.service;
 
+import com.pss.alcs.atlassian.domain.AtlassianTool;
 import com.pss.atlassian.tools.jira.JiraClient;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +19,14 @@ public class LeaseService implements ILeaseService{
     }
 
     @Override
-    public boolean grantLease(String userId, double duration)
+    public boolean grantLease(String userId, double duration,AtlassianTool tool)
     {
         JiraClient client  = new JiraClient(JIRA_URL);
         return client.addUserToAdministratorGroup(userId);
     }
 
     @Override
-    public boolean revokeLease(String userId)
+    public boolean revokeLease(String userId,AtlassianTool tool)
     {
         JiraClient client  = new JiraClient(JIRA_URL);
         return client.removeUserFromAdministrator(userId);

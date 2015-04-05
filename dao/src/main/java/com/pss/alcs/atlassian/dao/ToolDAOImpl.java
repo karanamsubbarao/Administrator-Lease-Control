@@ -36,9 +36,18 @@ public class ToolDAOImpl extends AbstractDAO implements IToolDAO
         return (List<AtlassianTool>) criteria.list();
     }
 
+
+
     public AtlassianTool findAtlassianToolByURL(String url){
         Criteria criteria = getSession().createCriteria(AtlassianTool.class);
         criteria.add(Restrictions.eq("url", url));
+        return (AtlassianTool)criteria.uniqueResult();
+    }
+
+    @Override
+    public AtlassianTool findAtlassianToolByName(String name) {
+        Criteria criteria = getSession().createCriteria(AtlassianTool.class);
+        criteria.add(Restrictions.eq("name", name));
         return (AtlassianTool)criteria.uniqueResult();
     }
 }

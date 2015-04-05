@@ -12,4 +12,7 @@ public interface IToolService {
     public boolean deleteTool(AtlassianTool tool);
     public boolean updateTool(AtlassianTool tool);
 
+    public AtlassianTool findToolByName(String name);
+
+
 }
