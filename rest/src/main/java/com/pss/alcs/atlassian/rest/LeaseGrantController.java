@@ -27,24 +27,22 @@ public class LeaseGrantController {
     }
 
 
-    @RequestMapping(value = "/rest/lease/grant/{userId}/{duration}/{nameOfTool}", method = RequestMethod.GET)
-    @ApiOperation(httpMethod = "GET", value = "Grants the Administrator Privileges", produces = "application/json")
+    @RequestMapping(value = "/rest/lease/grant/{userId}/{duration}/{nameOfTool}", method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST", value = "Grants the Administrator Privileges", produces = "application/json")
     public @ResponseBody
     boolean grantAdministratorPrivilege(@PathVariable("userId") String userId,@PathVariable("duration") String duration,
                                         @PathVariable("nameOfTool") String nameOfTool)
     {
-        AtlassianTool tool = toolService.findToolByName(nameOfTool);
         double durationValue = Double.parseDouble(duration);
-        return leaseService.grantLease(userId,durationValue,tool);
+        return leaseService.grantLease(userId,durationValue,nameOfTool);
     }
 
-    @RequestMapping(value = "/rest/lease/revoke/{userId}/{nameOfTool}", method = RequestMethod.GET)
-    @ApiOperation(httpMethod = "GET", value = "Grants the Administrator Privileges", produces = "application/json")
+    @RequestMapping(value = "/rest/lease/revoke/{userId}/{nameOfTool}", method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST", value = "Revokes the Administrator Privileges", produces = "application/json")
     public @ResponseBody
     boolean revokeAdministratorPrivilege(@PathVariable("userId") String userId,@PathVariable("nameOfTool") String nameOfTool)
     {
-        AtlassianTool tool = toolService.findToolByName(nameOfTool);
-        return leaseService.revokeLease(userId,tool);
+        return leaseService.revokeLease(userId,nameOfTool);
     }
 
 }

@@ -19,5 +19,6 @@ public interface IToolDAO
 
     public AtlassianTool findAtlassianToolByName(String name);
 
+    public List<AtlassianTool>  findAtlassianTools();
 
 }

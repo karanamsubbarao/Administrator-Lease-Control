@@ -7,6 +7,6 @@ import com.pss.alcs.atlassian.domain.AtlassianTool;
  */
 public interface ILeaseService {
     public String helloLease(String userId,double duration);
-    public boolean grantLease(String userId,double duration,AtlassianTool tool);
-    public boolean revokeLease(String userId,AtlassianTool tool);
+    public boolean grantLease(String userId,double duration,String nameOfTool);
+    public boolean revokeLease(String userId,String nameOfTool);
 }

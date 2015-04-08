@@ -5,6 +5,8 @@ import com.pss.alcs.atlassian.dao.IToolDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by skaranam on 4/4/2015.
  */
@@ -40,6 +42,16 @@ public class ToolService implements IToolService
     public AtlassianTool findToolByName(String name)
     {
         return toolDAO.findAtlassianToolByName(name);
+    }
+
+    @Override
+    public List<AtlassianTool> findAtlassianToolsByType(String type) {
+        return toolDAO.findAtlassianToolByType(type);
+    }
+
+    @Override
+    public List<AtlassianTool> findAtlassianTools() {
+        return toolDAO.findAtlassianTools();
     }
 
 }

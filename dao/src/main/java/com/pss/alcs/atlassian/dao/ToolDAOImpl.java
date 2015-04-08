@@ -50,4 +50,10 @@ public class ToolDAOImpl extends AbstractDAO implements IToolDAO
         criteria.add(Restrictions.eq("name", name));
         return (AtlassianTool)criteria.uniqueResult();
     }
+
+    @Override
+    public List<AtlassianTool> findAtlassianTools() {
+        Criteria criteria = getSession().createCriteria(AtlassianTool.class);
+        return (List<AtlassianTool>) criteria.list();
+    }
 }
