@@ -52,4 +52,18 @@ public class LeaseGrantControllerUnitTest {
         mockMvc.perform(post("/rest/requestLease/subbak/1/Change/LOCAL-JIRA").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest());
     }
 
+    @Test
+    public void testGrantAdministratorPrivilegeForSuccess() throws Exception
+    {
+        when(leaseService.grantLease(1L)).thenReturn(true);
+        mockMvc.perform(post("/rest/lease/grant/1")).andExpect(status().isOk());
+    }
+
+
+    @Test
+    public void testGrantAdministratorPrivilegeForFailure() throws Exception
+    {
+        when(leaseService.grantLease(1L)).thenReturn(false);
+        mockMvc.perform(post("/rest/lease/grant/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest());
+    }
 }
