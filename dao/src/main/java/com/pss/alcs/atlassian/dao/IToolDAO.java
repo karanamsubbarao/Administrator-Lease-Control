@@ -5,7 +5,7 @@ import com.pss.alcs.atlassian.domain.AtlassianTool;
 import java.util.List;
 
 /**
- * Created by skaranam on 3/28/2015.
+ * Interface for Operations on Tools
  */
 public interface IToolDAO
 {

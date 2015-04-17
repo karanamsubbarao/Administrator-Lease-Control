@@ -8,6 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
+/**
+ * Implementation for CRUD Operations for Atlassian tools
+ */
 @Repository("toolDao")
 @Transactional
 public class ToolDAOImpl extends AbstractDAO implements IToolDAO

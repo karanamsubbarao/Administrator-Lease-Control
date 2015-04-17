@@ -1,6 +1,9 @@
-package com.pss.alcs.atlassian.dao; /**
- * Created by skaranam on 3/28/2015.
+package com.pss.alcs.atlassian.dao;
+
+/**
+ * Abstract Class for DAO Operations
  */
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,14 @@ public abstract class AbstractDAO {
         return sessionFactory.getCurrentSession();
     }
 
-    public void save(Object entity) {
+    public Object save(Object entity) {
         getSession().persist(entity);
+        return entity;
+    }
+
+    public Object update(Object entity) {
+        getSession().update(entity);
+        return entity;
     }
 
     public void delete(Object entity) {

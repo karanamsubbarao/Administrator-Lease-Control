@@ -3,7 +3,7 @@ package com.pss.alcs.atlassian.domain;
 import javax.persistence.*;
 
 /**
- * Created by skaranam on 3/28/2015.
+ * Domain Class for Atlassian Tool
  */
 
 @Entity
@@ -12,15 +12,13 @@ public class AtlassianTool {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int toolId;
 
     @Column(name = "TYPE", nullable = false)
     private String type;
 
-
     @Column(name = "NAME", nullable = false)
     private String name;
-
 
     @Column(name = "URL", unique=true, nullable = false)
     private String url;

@@ -1,7 +1,7 @@
 package com.pss.alcs.atlassian.service;
 
-import com.pss.alcs.atlassian.domain.AtlassianTool;
 import com.pss.alcs.atlassian.dao.IToolDAO;
+import com.pss.alcs.atlassian.domain.AtlassianTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

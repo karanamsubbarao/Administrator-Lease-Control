@@ -1,48 +1,63 @@
 package com.pss.alcs.atlassian.rest;
 
-import com.pss.alcs.atlassian.domain.AtlassianTool;
 import com.pss.alcs.atlassian.service.ILeaseService;
-import com.pss.alcs.atlassian.service.IToolService;
+import com.pss.alcs.atlassian.service.INotificationService;
 import com.wordnik.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Created by skaranam on 4/4/2015.
+ * Controller which will receive REST requests for Lease Operations such as Grant and revoke
  */
+
 @RestController
 public class LeaseGrantController {
 
     @Autowired
     private ILeaseService leaseService;
 
-    @Autowired
-    private IToolService toolService;
-
-
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    @ApiOperation(httpMethod = "GET", value = "Fetches the Hello World", produces = "application/json")
-    public @ResponseBody String helloWorld() {
-        return "hello world";
+    @RequestMapping(value = "/rest/requestLease/{userId}/{duration}/{reason}/{nameOfTool}", method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST", value = "API to initiate the lease request for Administrator")
+    public @ResponseBody ResponseEntity notifyLeaseRequest(@PathVariable("userId") String userId,@PathVariable("duration") String duration,
+                               @PathVariable("reason") String reason,@PathVariable("nameOfTool") String nameOfTool)
+    {
+        int durationValue = Integer.parseInt(duration);
+        boolean leaseRequestSent  = leaseService.requestLease(userId, durationValue, reason, nameOfTool);
+        if(leaseRequestSent)
+        {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 
-    @RequestMapping(value = "/rest/lease/grant/{userId}/{duration}/{nameOfTool}", method = RequestMethod.POST)
+    @RequestMapping(value = "/rest/lease/grant/{leaseId}", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Grants the Administrator Privileges", produces = "application/json")
     public @ResponseBody
-    boolean grantAdministratorPrivilege(@PathVariable("userId") String userId,@PathVariable("duration") String duration,
-                                        @PathVariable("nameOfTool") String nameOfTool)
+    ResponseEntity grantAdministratorPrivilege(@PathVariable("leaseId") String leaseId)
     {
-        double durationValue = Double.parseDouble(duration);
-        return leaseService.grantLease(userId,durationValue,nameOfTool);
+        long leaseIdentifier = Long.parseLong(leaseId);
+        boolean leaseGrantSucceeded =  leaseService.grantLease(leaseIdentifier);
+        if(leaseGrantSucceeded)
+        {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/rest/lease/revoke/{userId}/{nameOfTool}", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Revokes the Administrator Privileges", produces = "application/json")
     public @ResponseBody
-    boolean revokeAdministratorPrivilege(@PathVariable("userId") String userId,@PathVariable("nameOfTool") String nameOfTool)
+    ResponseEntity revokeAdministratorPrivilege(@PathVariable("userId") String userId,@PathVariable("nameOfTool") String nameOfTool)
     {
-        return leaseService.revokeLease(userId,nameOfTool);
+        boolean revokeGrantSucceeded =  leaseService.revokeLease(userId,nameOfTool);
+        if(revokeGrantSucceeded)
+        {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-
 }
