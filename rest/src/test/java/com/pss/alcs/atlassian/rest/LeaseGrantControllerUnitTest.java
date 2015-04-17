@@ -74,7 +74,6 @@ public class LeaseGrantControllerUnitTest {
         mockMvc.perform(post("/rest/lease/revoke/subbak/LOCAL-JIRA")).andExpect(status().isOk());
     }
 
-
     @Test
     public void testRevokeAdministratorPrivilegeForFailure() throws Exception
     {
