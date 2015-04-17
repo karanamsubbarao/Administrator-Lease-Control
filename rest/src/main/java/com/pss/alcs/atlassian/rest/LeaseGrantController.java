@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class LeaseGrantController {
 
-    @Autowired
     private ILeaseService leaseService;
+
+    @Autowired
+    public LeaseGrantController(ILeaseService leaseService)
+    {
+        this.leaseService = leaseService;
+    }
 
     @RequestMapping(value = "/rest/requestLease/{userId}/{duration}/{reason}/{nameOfTool}", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "API to initiate the lease request for Administrator")
