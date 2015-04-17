@@ -23,6 +23,12 @@ public class ToolServiceController {
 
     private static final String ENCODING = "UTF-8";
 
+    @Autowired
+    public ToolServiceController(IToolService toolService)
+    {
+        this.toolService = toolService;
+    }
+
     @RequestMapping(value = "/rest/register/tool/{type}/{name}/{url}/{apiEndPoint}/{approverEmailAddress}", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Registers the new Atlassian tool", produces = "application/json")
     public @ResponseBody ResponseEntity<AtlassianTool> registerTool(@PathVariable("type") String type, @PathVariable("name")  String name,
