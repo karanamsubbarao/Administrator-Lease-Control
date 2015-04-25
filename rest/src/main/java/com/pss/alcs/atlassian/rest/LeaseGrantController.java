@@ -39,8 +39,8 @@ public class LeaseGrantController {
     }
 
 
-    @RequestMapping(value = "/rest/lease/grant/{leaseId}", method = RequestMethod.POST)
-    @ApiOperation(httpMethod = "POST", value = "Grants the Administrator Privileges", produces = "application/json")
+    @RequestMapping(value = "/rest/lease/grant/{leaseId}", method = RequestMethod.GET)
+    @ApiOperation(httpMethod = "GET", value = "Grants the Administrator Privileges", produces = "application/json")
     public @ResponseBody
     ResponseEntity grantAdministratorPrivilege(@PathVariable("leaseId") String leaseId)
     {

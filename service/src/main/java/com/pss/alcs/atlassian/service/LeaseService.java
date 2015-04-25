@@ -70,7 +70,7 @@ public class LeaseService implements ILeaseService{
     @Override
     public boolean revokeLease(Lease currentLease)
     {
-        if(!currentLease.isActive())
+        if(currentLease.isActive())
         {
             currentLease.setTerminatedTimeStamp(new Date());
             currentLease.setActive(false);

@@ -13,7 +13,7 @@ public class Lease {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int leaseId;
+    private long leaseId;
 
     @Column(name = "userId", nullable = false)
     private String userId;
@@ -125,11 +125,11 @@ public class Lease {
         this.createdTimeStamp = createdTimeStamp;
     }
 
-    public int getLeaseId() {
+    public long getLeaseId() {
         return leaseId;
     }
 
-    public void setLeaseId(int leaseId) {
+    public void setLeaseId(long leaseId) {
         this.leaseId = leaseId;
     }
 }
