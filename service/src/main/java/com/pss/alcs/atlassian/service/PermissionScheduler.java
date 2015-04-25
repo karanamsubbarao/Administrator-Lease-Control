@@ -32,7 +32,7 @@ public class PermissionScheduler {
             DateTime currentTime = DateTime.now();
             DateTime expectedLeaseEndTime  =
                     new DateTime(currentLease.getApprovedTimeStamp()).plusHours(currentLease.getDuration());
-            if(currentTime.isAfter(expectedLeaseEndTime))
+            if(currentTime.isAfter(expectedLeaseEndTime) && currentLease.isActive())
             {
                 leaseService.revokeLease(currentLease);
             }
