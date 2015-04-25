@@ -9,7 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -29,14 +32,13 @@ public class ToolServiceController {
         this.toolService = toolService;
     }
 
-    @RequestMapping(value = "/rest/register/tool/{type}/{name}/{url}/{apiEndPoint}/{approverEmailAddress}", method = RequestMethod.POST)
+    @RequestMapping(value = "/rest/register/tool/{type}/{name}", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Registers the new Atlassian tool", produces = "application/json")
     public @ResponseBody ResponseEntity<AtlassianTool> registerTool(@PathVariable("type") String type, @PathVariable("name")  String name,
-                                              @PathVariable("url") String url, @PathVariable("apiEndPoint") String apiEndPoint,
-                                              @PathVariable("approverEmailAddress") String approverEmailAddress) throws UnsupportedEncodingException {
-        String toolUrl = UriUtils.decode(url,ENCODING);
-        String toolApiUrl= UriUtils.decode(apiEndPoint,ENCODING);
-        AtlassianTool tool = new AtlassianTool(type,name,toolUrl,toolApiUrl,approverEmailAddress);
+                                                                    @RequestParam("approverEmailAddress") String approverEmailAddress,
+                                                                    @RequestParam("url") String url,
+                                                                    @RequestParam("apiEndPoint") String apiEndPoint) throws UnsupportedEncodingException {
+        AtlassianTool tool = new AtlassianTool(type,name,url,apiEndPoint,approverEmailAddress);
         AtlassianTool toolFromDB = toolService.saveTool(tool);
         return new ResponseEntity<AtlassianTool>(toolFromDB,HttpStatus.OK);
     }

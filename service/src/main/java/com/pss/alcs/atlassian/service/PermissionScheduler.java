@@ -23,7 +23,7 @@ public class PermissionScheduler {
     @Autowired
     private ILeaseService leaseService;
 
-    @Scheduled(fixedRate=1000)
+    @Scheduled(fixedRate=5000)
     public void processLeaseRequests()
     {
         final List<Lease> allActiveLeases = leaseDAO.findAllActiveLeases();
@@ -37,6 +37,5 @@ public class PermissionScheduler {
                 leaseService.revokeLease(currentLease);
             }
         }
-        System.out.println("Calling Process Lease Requests in Service Layer");
     }
 }
